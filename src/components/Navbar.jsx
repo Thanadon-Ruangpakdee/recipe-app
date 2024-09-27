@@ -24,6 +24,7 @@ function Navbar() {
     <nav className={`fixed top-0 left-0 w-full z-50 transition duration-300 ease-in-out ${navbarScrolled ? 'bg-white shadow-lg' : 'bg-transparent'}`}>
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo or Branding */}
+        <img src="/foodlogo.jpg" alt="RecipeApp" style={{ width: '30px', height: '30px' }} />
         <Link to="/" className="text-3xl font-bold text-teal-500">RecipeApp</Link>
 
         {/* Desktop Navigation Links */}

@@ -1,19 +1,38 @@
-function WelcomePage() {
-  return (
-    <div className="relative h-screen bg-cover bg-center" style={{ backgroundImage: `url('/path-to-your-image.jpg')` }}>
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+import React from 'react';
 
-      {/* Hero Text */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white">
-        <h1 className="text-6xl font-extrabold tracking-wide mb-4">Delicious Recipes</h1>
-        <p className="text-2xl font-light mb-6">Discover, Create, and Enjoy</p>
-        <a href="/recipes" className="px-8 py-3 bg-teal-500 text-lg font-semibold rounded-full hover:bg-teal-600 transition duration-300">
-          Explore Recipes
-        </a>
+const WelcomePage = () => {
+  return (
+    <div className="flex flex-col md:flex-row h-screen">
+      {/* Left Section */}
+      <div className="flex-1 flex flex-col justify-center items-start px-10 md:px-20 space-y-5">
+        {/* Main Heading (Logo) */}
+        <h1 style={{ color: 'black' }}>MyRecipe</h1>
+        
+        {/* Subheading */}
+        <h2 style={{ color: 'black' }}>Recipes Online</h2>
+        
+        {/* Main Bold Text */}
+        <h3 style={{ color: 'black' }}>
+          New recipes <br /> every week
+        </h3>
+        
+        {/* Paragraph */}
+        <p style={{ color: 'black' }}>
+          Pellentesque vel metus sit amet dui suscipit placerat. Nam consectetur turpis metus, id aliquam nibh aliquet eget.
+        </p>
+        
+        {/* Button */}
+        <button className="bg-black text-white py-3 px-6 rounded-full hover:bg-gray-800 transition">
+          Discover More
+        </button>
+      </div>
+
+      {/* Right Section - Image */}
+      <div className="flex-1">
+        <img src="/food.jpg" alt="Food" className="object-cover w-full h-full" />
       </div>
     </div>
   );
-}
+};
 
 export default WelcomePage;
