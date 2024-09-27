@@ -1,26 +1,26 @@
 {
   "recipes": [
-    {
-      "id": 1,
-      "name": "Spaghetti Carbonara",
-      "prep_time": 30,
-      "ingredients": [
-        { "name": "Spaghetti", "quantity": "200g" },
-        { "name": "Eggs", "quantity": "4 large" },
-        { "name": "Pancetta", "quantity": "100g" }
-      ],
-      "instructions": "Boil spaghetti. Cook pancetta. Mix with eggs."
-    },
-    {
-      "id": 2,
-      "name": "Pancakes",
-      "prep_time": 20,
-      "ingredients": [
-        { "name": "Flour", "quantity": "200g" },
-        { "name": "Milk", "quantity": "200ml" },
-        { "name": "Egg", "quantity": "1 large" }
-      ],
-      "instructions": "Mix ingredients. Cook on skillet."
-    }
+      {
+          "id": 1,
+          "name": "Spaghetti Carbonara",
+          "prep_time": 30,
+          "ingredients": [
+              { "name": "Spaghetti", "quantity": "200g" },
+              { "name": "Eggs", "quantity": "4 large" },
+              { "name": "Pancetta", "quantity": "100g" }
+          ],
+          "instructions": "Boil spaghetti. Cook pancetta. Mix with eggs."
+      },
+      {
+          "id": 2,
+          "name": "Pancakes",
+          "prep_time": 20,
+          "ingredients": [
+              { "name": "Flour", "quantity": "200g" },
+              { "name": "Milk", "quantity": "200ml" },
+              { "name": "Egg", "quantity": "1 large" }
+          ],
+          "instructions": "Mix ingredients. Cook on skillet."
+      }
   ]
 }

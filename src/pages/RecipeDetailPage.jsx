@@ -25,13 +25,13 @@ function RecipeDetailPage({ recipes, deleteRecipe }) {
         <div className="mt-8 flex space-x-4">
           <button
             onClick={handleDelete}
-            className="px-4 py-2 bg-red-500 text-black font-semibold rounded-lg hover:bg-red-600 transition duration-300"
+            className="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition duration-300"
           >
             Delete Recipe
           </button>
           <button
             onClick={() => navigate('/recipes')}
-            className="px-4 py-2 bg-gray-500 text-black font-semibold rounded-lg hover:bg-gray-600 transition duration-300"
+            className="px-4 py-2 bg-gray-500 text-white font-semibold rounded-lg hover:bg-gray-600 transition duration-300"
           >
             Back to Recipes
           </button>
