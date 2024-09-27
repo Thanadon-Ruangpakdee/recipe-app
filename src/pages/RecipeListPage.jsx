@@ -1,18 +1,14 @@
 import RecipeCard from '../components/RecipeCard';
 
-function RecipeListPage() {
-  // Dummy data
-  const recipes = [
-    { id: 1, title: 'Spaghetti Bolognese' },
-    { id: 2, title: 'Chicken Curry' },
-  ];
-
+function RecipeListPage({ recipes }) {
   return (
-    <div>
-      <h1>All Recipes</h1>
-      {recipes.map(recipe => (
-        <RecipeCard key={recipe.id} recipe={recipe} />
-      ))}
+    <div className="container mx-auto mt-16 p-4">
+      <h1 className="text-4xl font-bold text-gray-800 mb-6">All Recipes</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {recipes.map(recipe => (
+          <RecipeCard key={recipe.id} recipe={recipe} />
+        ))}
+      </div>
     </div>
   );
 }
