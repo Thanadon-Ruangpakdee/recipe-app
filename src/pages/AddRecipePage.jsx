@@ -17,26 +17,25 @@ function AddRecipePage({ addRecipe }) {
     }
 
     const newRecipe = {
+      id: Date.now(), // Unique ID for the new recipe
       title,
       ingredients: ingredients.split(',').map(item => item.trim())
     };
 
-    addRecipe(newRecipe);
-    // Clear input fields
+    addRecipe(newRecipe); // Call the function to add the new recipe
     setTitle('');
     setIngredients('');
-    setError(''); // Reset error
-
+    setError('');
     navigate('/recipes');  // Redirect to Recipe List after adding
   };
 
   return (
     <div className="container mx-auto mt-16 p-4">
-      <h1 className="text-4xl font-bold text-black mb-6">Add a New Recipe</h1> {/* Changed to black */}
+      <h1 className="text-4xl font-bold text-black mb-6">Add a New Recipe</h1>
       {error && <p className="text-red-500">{error}</p>} {/* Show error message */}
       <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-lg shadow-lg">
         <div>
-          <label className="block text-lg font-medium text-black">Title:</label> {/* Changed to black */}
+          <label className="block text-lg font-medium text-black">Title:</label>
           <input
             type="text"
             value={title}
@@ -45,7 +44,7 @@ function AddRecipePage({ addRecipe }) {
           />
         </div>
         <div>
-          <label className="block text-lg font-medium text-black">Ingredients (comma-separated):</label> {/* Changed to black */}
+          <label className="block text-lg font-medium text-black">Ingredients (comma-separated):</label>
           <textarea
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}

@@ -1,23 +1,34 @@
 import { useParams, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 function RecipeDetailPage({ recipes, deleteRecipe }) {
   const { id } = useParams();
   const navigate = useNavigate();
-  const recipe = recipes.find(r => r.id === parseInt(id));
+  const [recipe, setRecipe] = useState(null);
 
-  if (!recipe) return <p className="text-center text-red-500">Recipe not found!</p>;
+  useEffect(() => {
+    const foundRecipe = recipes.find((r) => r.id === parseInt(id));
+    setRecipe(foundRecipe);
+  }, [id, recipes]);
+
+  if (!recipe) {
+    return <p className="text-center text-black font-semibold">Recipe not found!</p>;
+  }
 
   const handleDelete = () => {
-    deleteRecipe(recipe.id);
-    navigate('/recipes'); // Redirect to the recipe list page after deletion
+    const confirmed = window.confirm('Are you sure you want to delete this recipe?');
+    if (confirmed) {
+      deleteRecipe(recipe.id);
+      navigate('/recipes'); // Redirect to the recipe list page after deletion
+    }
   };
 
   return (
     <div className="container mx-auto mt-16 p-4">
-      <h1 className="text-5xl font-bold text-gray-800 mb-4">{recipe.title}</h1>
+      <h1 className="text-5xl font-bold text-black mb-4">{recipe.title}</h1>
       <div className="bg-white p-6 rounded-lg shadow-lg">
-        <h2 className="text-3xl font-semibold text-gray-700 mb-2">Ingredients:</h2>
-        <ul className="list-disc pl-5 text-lg text-gray-600">
+        <h2 className="text-3xl font-semibold text-black mb-2">Ingredients:</h2>
+        <ul className="list-disc pl-5 text-lg text-gray-700">
           {recipe.ingredients.map((ingredient, index) => (
             <li key={index}>{ingredient}</li>
           ))}
