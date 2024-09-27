@@ -18,29 +18,26 @@ function AddRecipePage({ addRecipe }) {
 
   return (
     <div className="container mx-auto mt-16 p-4">
-      <h1 className="text-4xl font-bold text-gray-800 mb-6">Add a New Recipe</h1>
-      <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-lg shadow-lg">
+      <h1 className="text-3xl font-bold mb-6">Add a New Recipe</h1>
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-lg font-medium text-gray-700">Title:</label>
+          <label className="block text-lg font-medium">Title:</label>
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="w-full p-2 border border-gray-300 rounded-lg"
           />
         </div>
         <div>
-          <label className="block text-lg font-medium text-gray-700">Ingredients (comma-separated):</label>
+          <label className="block text-lg font-medium">Ingredients (comma-separated):</label>
           <textarea
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="w-full p-2 border border-gray-300 rounded-lg"
           />
         </div>
-        <button
-          type="submit"
-          className="px-6 py-2 bg-teal-500 text-white text-lg font-semibold rounded-lg hover:bg-teal-600 transition duration-300"
-        >
+        <button type="submit" className="px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600">
           Add Recipe
         </button>
       </form>
