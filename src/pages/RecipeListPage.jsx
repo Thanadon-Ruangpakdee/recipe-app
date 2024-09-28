@@ -1,38 +1,32 @@
-import { useEffect, useState } from 'react';
-import RecipeCard from '../components/RecipeCard';
-import recipesData from '../data/recipe.json';
-function RecipeListPage() {
-  const [recipes, setRecipes] = useState([]);
+import { Link } from 'react-router-dom';
 
-  // Fetch the recipes from the JSON file
-  useEffect(() => {
-    fetch('/data/recipe.json')  // Now fetching from public/data/recipe.json
-      .then((response) => response.json())
-      .then((data) => {
-        setRecipes(data.recipes);
-      })
-      .catch((error) => {
-        console.error('Error fetching recipes:', error);
-      });
-  }, []); // Empty dependency array to fetch only once on mount
-
+function RecipeListPage({ recipes }) {
   if (recipes.length === 0) {
     return (
       <div className="container mx-auto mt-16 p-4">
-        <h1 className="text-4xl font-bold text-gray-800 mb-6">No Recipes Found</h1>
-        <p className="text-lg text-gray-600">
-          It looks like there are no recipes available. Try adding some!
-        </p>
+        <h1 className="text-black text-4xl font-bold mb-6">No Recipes Found</h1>
+        <p className="text-black text-lg">It looks like there are no recipes available. Try adding some!</p>
       </div>
     );
   }
 
   return (
     <div className="container mx-auto mt-16 p-4">
-      <h1 style={{ color: 'black' }}>All Recipes</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <h1 className="text-black text-4xl font-bold mb-6">All Recipes</h1>
+      <div className="grid-container">
         {recipes.map((recipe) => (
-          <RecipeCard key={recipe.id} recipe={recipe} />
+          <div key={recipe.id} className="card">
+            <img 
+              src={recipe.image} 
+              alt={recipe.name} 
+            />
+            <div className="card-body">
+              <h3 className="card-title">{recipe.name}</h3>
+              <p className="card-text">Prep Time: {recipe.prep_time} mins</p>
+              <p className="card-text">Ingredients: {recipe.ingredients.length} items</p>
+              <Link to={`/recipes/${recipe.id}`} className="button">View Details</Link>
+            </div>
+          </div>
         ))}
       </div>
     </div>
