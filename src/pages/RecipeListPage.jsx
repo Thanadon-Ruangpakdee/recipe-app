@@ -13,12 +13,19 @@ function RecipeListPage({ recipes }) {
   return (
     <div className="container mx-auto mt-16 p-4">
       <h1 className="text-black text-4xl font-bold mb-6">All Recipes</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid-container">
         {recipes.map((recipe) => (
-          <div key={recipe.id} className="border p-4 rounded-lg shadow-lg">
-            <h2 className="text-xl font-bold text-black">{recipe.name}</h2>
-            <p className="text-black text-gray-700">{recipe.instructions}</p> {/* ตรวจสอบการกำหนดสี */}
-            <Link to={`/recipes/${recipe.id}`} className="text-blue-500">View Details</Link>
+          <div key={recipe.id} className="card">
+            <img 
+              src={recipe.image} 
+              alt={recipe.name} 
+            />
+            <div className="card-body">
+              <h3 className="card-title">{recipe.name}</h3>
+              <p className="card-text">Prep Time: {recipe.prep_time} mins</p>
+              <p className="card-text">Ingredients: {recipe.ingredients.length} items</p>
+              <Link to={`/recipes/${recipe.id}`} className="button">View Details</Link>
+            </div>
           </div>
         ))}
       </div>
