@@ -7,6 +7,7 @@ import AddRecipePage from './pages/AddRecipePage';
 import NotFoundPage from './pages/NotFoundPage';
 import Navbar from './components/Navbar';
 import recipeData from './data/recipe.json'; // นำเข้าข้อมูลจาก recipe.json
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   // State สำหรับเก็บข้อมูลจาก localStorage เท่านั้น

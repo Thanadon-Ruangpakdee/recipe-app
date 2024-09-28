@@ -1,46 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function WelcomePage() {
   return (
-    <div className="flex h-screen">
-      {/* Left Section - Text */}
-      <div className="flex-1 flex flex-col justify-center p-12">
-        <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide">
-          Recipes Online
-        </h2>
-        <h1 className="text-6xl font-bold text-black mb-6">
-          New recipes <br /> every week
-        </h1>
-        <p className="text-lg text-gray-600 mb-6">
-          Pellentesque vel metus sit amet dui suscipit placerat. Nam consectetur turpis metus.
-        </p>
-        <button>
-        <Link to="/recipes" className="inline-block bg-black text-white px-6 py-3 text-lg rounded-full">
-          Discover More
-        </Link>
-        </button>
-        {/* Social Media Links */}
-        <div className="flex space-x-6 mt-8">
-          <a href="#" className="text-2xl text-black hover:text-gray-600">
-            <i className="fab fa-facebook"></i>
-          </a>
-          <a href="#" className="text-2xl text-black hover:text-gray-600">
-            <i className="fab fa-instagram"></i>
-          </a>
-          <a href="#" className="text-2xl text-black hover:text-gray-600">
-            <i className="fab fa-tumblr"></i>
-          </a>
-        </div>
+    <div className="container-fluid vh-100 d-flex flex-column flex-md-row">
+      {/* Right Section - Image */}
+      <div className="col-md-6 p-0">
+        <img
+          src="/image/food2.jpg"
+          alt="Food"
+          className="img-fluid h-100 w-100 object-fit-cover"
+        />
       </div>
 
-      {/* Right Section - Image */}
-      <div className="flex-1">
-        <img
-          src="food.jpg"
-          alt="Food"
-          className="object-cover w-full h-full"
-        />
+      {/* Left Section - Text with light pink background */}
+      <div className="col-md-6 d-flex align-items-center justify-content-center bg-light py-5 px-4">
+        <div className="text-center text-md-start">
+          <h2 className="text-uppercase text-secondary mb-3">
+            Recipes Online
+          </h2>
+          <h1 className="display-4 font-weight-bold mb-4">
+            New recipes <br /> every week
+          </h1>
+          <p className="lead text-muted mb-4">
+            Pellentesque vel metus sit amet dui suscipit placerat. Nam consectetur turpis metus.
+          </p>
+          <Link to="/recipes" className="btn btn-primary btn-lg px-5 py-3">
+            Discover More
+          </Link>
+        </div>
       </div>
     </div>
   );

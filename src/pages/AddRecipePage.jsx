@@ -32,54 +32,61 @@ function AddRecipePage({ addRecipe }) {
   };
 
   return (
-    <div className="container mx-auto mt-16 p-4">
-      <h1 className="text-4xl font-bold text-black mb-6">Add a New Recipe</h1>
-      <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-lg shadow-lg">
-        <div>
-          <label className="block text-lg font-medium text-black">Title:</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
-            required
-          />
-        </div>
-        <div>
-          <label className="block text-lg font-medium text-black">Ingredients (comma-separated):</label>
-          <textarea
-            value={ingredients}
-            onChange={(e) => setIngredients(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
-            required
-          />
-        </div>
-        <div>
-          <label className="block text-lg font-medium text-black">Instructions:</label>
-          <textarea
-            value={instructions}
-            onChange={(e) => setInstructions(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
-            required
-          />
-        </div>
-        <div>
-          <label className="block text-lg font-medium text-black">Upload Image:</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="w-full border border-gray-300 rounded-lg p-2"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="px-6 py-2 bg-teal-500 text-white text-lg font-semibold rounded-lg hover:bg-teal-600 transition duration-300"
-        >
-          Add Recipe
-        </button>
-      </form>
+    <div className="container d-flex justify-content-center align-items-center min-vh-100">
+      <div className="w-100" style={{ maxWidth: '600px' }}>
+        <h1 className="text-center text-primary mb-4">Add a New Recipe</h1>
+        <form onSubmit={handleSubmit} className="bg-light p-4 rounded shadow">
+          <div className="mb-3">
+            <label className="form-label">Title:</label>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Ingredients (comma-separated):</label>
+            <textarea
+              value={ingredients}
+              onChange={(e) => setIngredients(e.target.value)}
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Instructions:</label>
+            <textarea
+              value={instructions}
+              onChange={(e) => setInstructions(e.target.value)}
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Upload Image:</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="form-control"
+              required
+            />
+            {image && (
+              <div className="mt-3 text-center">
+                <img src={image} alt="Recipe Preview" className="img-fluid rounded" />
+              </div>
+            )}
+          </div>
+          <button
+            type="submit"
+            className="btn btn-primary w-100"
+          >
+            Add Recipe
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
