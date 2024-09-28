@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-function RecipeDetailPage({ recipes, deleteRecipe }) {
+function RecipeDetailPage({ recipes, deleteRecipe, localRecipes }) {
   const { id } = useParams(); // ดึง id จาก URL
   const navigate = useNavigate();
   const [recipe, setRecipe] = useState(null);
@@ -28,9 +28,16 @@ function RecipeDetailPage({ recipes, deleteRecipe }) {
     );
   }
 
+  // ตรวจสอบว่าสูตรอาหารนี้อยู่ใน localStorage หรือไม่
+  const isLocalRecipe = localRecipes.some((r) => r.id === recipe.id);
+
   const handleDelete = () => {
-    deleteRecipe(recipe.id); // เรียกฟังก์ชันลบสูตรอาหาร
-    navigate('/recipes'); // กลับไปที่หน้ารายการ
+    if (isLocalRecipe) { // สามารถลบได้เฉพาะสูตรใน localStorage
+      deleteRecipe(recipe.id);
+      navigate('/recipes');
+    } else {
+      alert('This recipe cannot be deleted.');
+    }
   };
 
   return (
@@ -48,12 +55,14 @@ function RecipeDetailPage({ recipes, deleteRecipe }) {
         <h3 className="text-2xl font-semibold text-black mt-4">Instructions:</h3>
         <p className="text-lg text-gray-700">{recipe.instructions}</p>
         <div className="mt-8 flex space-x-4">
-          <button
-            onClick={handleDelete}
-            className="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition duration-300"
-          >
-            Delete Recipe
-          </button>
+          {isLocalRecipe && ( // แสดงปุ่มลบเฉพาะข้อมูลที่มาจาก localStorage
+            <button
+              onClick={handleDelete}
+              className="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition duration-300"
+            >
+              Delete Recipe
+            </button>
+          )}
           <button
             onClick={() => navigate('/recipes')}
             className="px-4 py-2 bg-gray-500 text-white font-semibold rounded-lg hover:bg-gray-600 transition duration-300"

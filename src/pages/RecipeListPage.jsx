@@ -17,7 +17,7 @@ function RecipeListPage({ recipes }) {
         {recipes.map((recipe) => (
           <div key={recipe.id} className="border p-4 rounded-lg shadow-lg">
             <h2 className="text-xl font-bold text-black">{recipe.name}</h2>
-            <p className="text-gray-700">{recipe.instructions}</p>
+            <p className="text-black text-gray-700">{recipe.instructions}</p> {/* ตรวจสอบการกำหนดสี */}
             <Link to={`/recipes/${recipe.id}`} className="text-blue-500">View Details</Link>
           </div>
         ))}
