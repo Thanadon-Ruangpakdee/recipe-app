@@ -1,61 +1,81 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 
-function AddRecipePage({ addRecipe }) {
+const AddRecipePage = () => {
   const [title, setTitle] = useState('');
   const [ingredients, setIngredients] = useState('');
   const [instructions, setInstructions] = useState('');
-  const navigate = useNavigate();
+  const [image, setImage] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newRecipe = {
-      name: title,
-      ingredients: ingredients.split(',').map(item => ({ name: item.trim(), quantity: '' })), // แปลงข้อมูลเป็น array
-      instructions
-    };
-    addRecipe(newRecipe); // เรียกใช้ฟังก์ชัน addRecipe เพื่อเพิ่มสูตรอาหารใหม่
-    navigate('/recipes'); // กลับไปที่หน้ารายการสูตรอาหาร
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('ingredients', ingredients);
+    formData.append('instructions', instructions);
+    formData.append('recipeImage', image);
+
+    // ส่งข้อมูลไปยัง Backend
+    try {
+      const response = await fetch('http://localhost:5000/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      if (!response.ok) {
+        throw new Error('Something went wrong!');
+      }
+      alert('Recipe added successfully!');
+      // เคลียร์ฟอร์มหลังจากบันทึกข้อมูลแล้ว
+      setTitle('');
+      setIngredients('');
+      setInstructions('');
+      setImage(null);
+    } catch (error) {
+      console.error(error);
+      alert('Failed to add recipe.');
+    }
   };
 
   return (
-    <div className="container mx-auto mt-16 p-4">
-      <h1 className="text-4xl font-bold text-black mb-6">Add a New Recipe</h1>
-      <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-lg shadow-lg">
-        <div>
-          <label className="block text-lg font-medium text-black">Title:</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
-          />
-        </div>
-        <div>
-          <label className="block text-lg font-medium text-black">Ingredients (comma-separated):</label>
-          <textarea
-            value={ingredients}
-            onChange={(e) => setIngredients(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
-          />
-        </div>
-        <div>
-          <label className="block text-lg font-medium text-black">Instructions:</label>
-          <textarea
-            value={instructions}
-            onChange={(e) => setInstructions(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-400"
-          />
-        </div>
-        <button
-          type="submit"
-          className="px-6 py-2 bg-teal-500 text-white text-lg font-semibold rounded-lg hover:bg-teal-600 transition duration-300"
-        >
-          Add Recipe
-        </button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="title">Title:</label>
+      <input
+        type="text"
+        id="title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      /><br /><br />
+
+      <label htmlFor="ingredients">Ingredients (comma-separated):</label>
+      <input
+        type="text"
+        id="ingredients"
+        value={ingredients}
+        onChange={(e) => setIngredients(e.target.value)}
+      /><br /><br />
+
+      <label htmlFor="instructions">Instructions:</label>
+      <textarea
+        id="instructions"
+        value={instructions}
+        onChange={(e) => setInstructions(e.target.value)}
+      ></textarea><br /><br />
+
+      <label htmlFor="recipeImage">Upload Image:</label>
+      <input
+        type="file"
+        id="recipeImage"
+        onChange={handleImageChange}
+        accept="image/*"
+      /><br /><br />
+
+      <button type="submit">Add Recipe</button>
+    </form>
   );
-}
+};
 
 export default AddRecipePage;
