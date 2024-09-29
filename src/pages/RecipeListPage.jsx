@@ -50,7 +50,7 @@ function RecipeListPage({ recipes }) {
                   src={recipe.image} 
                   alt={recipe.name} 
                   className="card-img-top img-fluid" 
-                  style={{ height: '300px', objectFit: 'cover' }}
+                  style={{ height: '250px', objectFit: 'cover' }} // Adjust the height of the image
                 />
                 <div className="card-body d-flex flex-column">
                   <h4 className="card-title font-weight-bold">{recipe.name}</h4>
@@ -60,7 +60,9 @@ function RecipeListPage({ recipes }) {
                   <p className="card-text">
                     <strong>Ingredients:</strong> {recipe.ingredients.length} items
                   </p>
-                  <Link to={`/recipes/${recipe.id}`} className="mt-auto btn btn-success w-100">
+                  {/* Use flex-grow-1 to ensure this content pushes the button to the bottom */}
+                  <div className="flex-grow-1"></div> 
+                  <Link to={`/recipes/${recipe.id}`} className="btn btn-success w-100 mt-auto">
                     View Details
                   </Link>
                 </div>

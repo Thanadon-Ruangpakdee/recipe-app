@@ -71,3 +71,20 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.add-recipe-page {
+  background-image: url("image/Background.jpeg"); /* Replace with your image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-recipe-card {
+  max-width: 700px;
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+  border-radius: 10px; /* Optional rounded corners */
+}
