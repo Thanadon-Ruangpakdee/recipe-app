@@ -10,7 +10,8 @@
         { "name": "Pancetta", "quantity": "100g" }
       ],
       "instructions": "Boil spaghetti. Cook pancetta. Mix with eggs.",
-      "image": "/image/carbonara.jpg"
+      "image": "/image/carbonara.jpg",
+      "category": "Main Course"
     },
     {
       "id": 2,
@@ -22,7 +23,8 @@
         { "name": "Egg", "quantity": "1 large" }
       ],
       "instructions": "Mix ingredients. Cook on skillet.",
-      "image": "/image/pancakes.jpg"
+      "image": "/image/pancakes.jpg",
+      "category": "Breakfast"
     },
     {
       "id": 3,
@@ -34,7 +36,8 @@
         { "name": "Coconut Milk", "quantity": "400ml" }
       ],
       "instructions": "Cook chicken. Add curry powder and coconut milk. Simmer until done.",
-      "image": "image/Chicken Curry.jpeg"
+      "image": "image/Chicken Curry.jpeg",
+      "category": "Main Course"
     },
     {
       "id": 4,
@@ -46,7 +49,8 @@
         { "name": "Parmesan Cheese", "quantity": "50g" }
       ],
       "instructions": "Chop lettuce. Add croutons and cheese. Drizzle with Caesar dressing.",
-      "image": "image/caesar_salad.jpeg"
+      "image": "image/caesar_salad.jpeg",
+      "category": "Salad"
     },
     {
       "id": 5,
@@ -58,7 +62,8 @@
         { "name": "Mozzarella Cheese", "quantity": "150g" }
       ],
       "instructions": "Spread sauce on dough. Add cheese. Bake until golden.",
-      "image": "image/Margherita Pizza.webp"
+      "image": "image/Margherita Pizza.webp",
+      "category": "Main Course"
     },
     {
       "id": 6,
@@ -70,7 +75,8 @@
         { "name": "Lettuce", "quantity": "1 cup" }
       ],
       "instructions": "Cook beef with spices. Assemble tacos with beef, lettuce, and toppings.",
-      "image": "image/Beef Tacos.jpeg"
+      "image": "image/Beef Tacos.jpeg",
+      "category": "Main Course"
     },
     {
       "id": 7,
@@ -82,7 +88,8 @@
         { "name": "Garlic", "quantity": "2 cloves" }
       ],
       "instructions": "Stir-fry vegetables with garlic and soy sauce.",
-      "image": "image/Vegetable Stir Fry.jpeg"
+      "image": "image/Vegetable Stir Fry.jpeg",
+      "category": "Main Course"
     },
     {
       "id": 8,
@@ -94,7 +101,8 @@
         { "name": "Milk", "quantity": "100ml" }
       ],
       "instructions": "Dip bread in egg mixture. Cook on skillet until golden brown.",
-      "image": "image/French Toast.jpeg"
+      "image": "image/French Toast.jpeg",
+      "category": "Breakfast"
     },
     {
       "id": 9,
@@ -106,7 +114,8 @@
         { "name": "Olive Oil", "quantity": "2 tbsp" }
       ],
       "instructions": "Brush salmon with oil. Grill and serve with lemon slices.",
-      "image": "image/Grilled Salmon.jpeg"
+      "image": "image/Grilled Salmon.jpeg",
+      "category": "Main Course"
     },
     {
       "id": 10,
@@ -118,7 +127,8 @@
         { "name": "Sugar", "quantity": "150g" }
       ],
       "instructions": "Melt chocolate and butter. Mix in sugar and flour. Bake until set.",
-      "image": "image/Chocolate Brownies.jpeg"
+      "image": "image/Chocolate Brownies.jpeg",
+      "category": "Dessert"
     }
   ]
 }

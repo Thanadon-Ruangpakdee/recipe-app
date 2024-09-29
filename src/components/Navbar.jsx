@@ -51,27 +51,23 @@ function Navbar() {
         <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link
-                className={`nav-link ${navbarScrolled ? 'text-dark' : 'text-dark'} fw-semibold`}
-                to="/"
-              >
+              <Link className={`nav-link ${navbarScrolled ? 'text-dark' : 'text-dark'} fw-semibold`} to="/">
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link
-                className={`nav-link ${navbarScrolled ? 'text-dark' : 'text-dark'} fw-semibold`}
-                to="/recipes"
-              >
+              <Link className={`nav-link ${navbarScrolled ? 'text-dark' : 'text-dark'} fw-semibold`} to="/recipes">
                 Recipes
               </Link>
             </li>
             <li className="nav-item">
-              <Link
-                className={`nav-link ${navbarScrolled ? 'text-dark' : 'text-dark'} fw-semibold`}
-                to="/add-recipe"
-              >
+              <Link className={`nav-link ${navbarScrolled ? 'text-dark' : 'text-dark'} fw-semibold`} to="/add-recipe">
                 Add Recipe
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className={`nav-link ${navbarScrolled ? 'text-dark' : 'text-dark'} fw-semibold`} to="/highlighted-recipes">
+                Highlighted Recipes
               </Link>
             </li>
           </ul>
