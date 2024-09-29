@@ -37,7 +37,7 @@ function App() {
   const combinedRecipes = [...recipeData.recipes, ...localRecipes];
 
   return (
-    <Router>
+    <Router basename="/recipe-app"> {/* Add basename here */}
       <Navbar />
       <Routes>
         <Route path="/" element={<WelcomePage />} />

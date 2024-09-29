@@ -8,7 +8,7 @@ function WelcomePage() {
       {/* Right Section - Image */}
       <div className="col-md-6 p-0">
         <img
-          src="/image/food2.jpg"
+          src="public/image/food2.jpg"
           alt="Food"
           className="img-fluid h-100 w-100 object-fit-cover"
         />

@@ -28,7 +28,7 @@ function Navbar() {
       <div className="container">
         <Link className="navbar-brand d-flex align-items-center" to="/">
           <img
-            src="/image/foodlogo.jpg"
+            src="public/image/foodlogo.jpg"
             alt="RecipeApp"
             style={{ width: '30px', height: '30px' }}
             className="me-2"
