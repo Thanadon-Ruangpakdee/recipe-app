@@ -4,10 +4,10 @@ import WelcomePage from './pages/WelcomePage';
 import RecipeListPage from './pages/RecipeListPage';
 import RecipeDetailPage from './pages/RecipeDetailPage';
 import AddRecipePage from './pages/AddRecipePage';
-import HighlightPage from './pages/HighlightPage'; // Import the HighlightPage
+import HighlightPage from './pages/HighlightPage'; 
 import NotFoundPage from './pages/NotFoundPage';
 import Navbar from './components/Navbar';
-import recipeData from './data/recipe.json'; // Import data from recipe.json
+import recipeData from './data/recipe.json'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
@@ -37,14 +37,14 @@ function App() {
   const combinedRecipes = [...recipeData.recipes, ...localRecipes];
 
   return (
-    <Router basename="/recipe-app"> {/* Add basename here */}
+    <Router basename="/recipe-app"> {/* Keep this */}
       <Navbar />
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/recipes" element={<RecipeListPage recipes={combinedRecipes} />} />
         <Route path="/recipes/:id" element={<RecipeDetailPage recipes={combinedRecipes} deleteRecipe={deleteRecipe} localRecipes={localRecipes} />} />
         <Route path="/add-recipe" element={<AddRecipePage addRecipe={addRecipe} />} />
-        <Route path="/highlighted-recipes" element={<HighlightPage />} /> {/* Add HighlightPage route */}
+        <Route path="/highlighted-recipes" element={<HighlightPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
