@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Navbar() {
   const [navbarScrolled, setNavbarScrolled] = useState(false);
@@ -22,56 +21,30 @@ function Navbar() {
   }, []);
 
   return (
-    <nav
-      className={`navbar navbar-expand-lg fixed-top ${navbarScrolled ? 'navbar-light bg-light shadow-sm' : 'navbar-light bg-light shadow-sm'} transition ease-in-out duration-300`}
-    >
-      <div className="container">
-        <Link className="navbar-brand d-flex align-items-center" to="/">
-          <img
-            src="./public/image/foodlogo.jpeg"
-            alt="RecipeApp"
-            style={{ width: '30px', height: '30px' }}
-            className="me-2"
-          />
-          <span className="fw-bold text-dark">RecipeApp</span>
-        </Link>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition duration-300 ease-in-out ${navbarScrolled ? 'bg-white shadow-lg' : 'bg-transparent'}`}>
+      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        {/* Logo or Branding */}
+        <img src="/image/foodlogo.jpg" alt="RecipeApp" style={{ width: '30px', height: '30px' }} />
+        <Link to="/" className="text-3xl font-bold text-teal-500">RecipeApp</Link>
 
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
-        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link className={`nav-link ${navbarScrolled ? 'text-dark' : 'text-dark'} fw-semibold`} to="/">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className={`nav-link ${navbarScrolled ? 'text-dark' : 'text-dark'} fw-semibold`} to="/recipes">
-                Recipes
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className={`nav-link ${navbarScrolled ? 'text-dark' : 'text-dark'} fw-semibold`} to="/add-recipe">
-                Add Recipe
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className={`nav-link ${navbarScrolled ? 'text-dark' : 'text-dark'} fw-semibold`} to="/highlighted-recipes">
-                Highlighted Recipes
-              </Link>
-            </li>
-          </ul>
-        </div>
+        {/* Desktop Navigation Links */}
+        <ul className="flex space-x-10">
+          <li>
+            <Link to="/" className={`font-semibold text-lg ${navbarScrolled ? 'text-gray-800' : 'text-white'} hover:text-teal-500 transition duration-300`}>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/recipes" className={`font-semibold text-lg ${navbarScrolled ? 'text-gray-800' : 'text-white'} hover:text-teal-500 transition duration-300`}>
+              Recipes
+            </Link>
+          </li>
+          <li>
+            <Link to="/add-recipe" className={`font-semibold text-lg ${navbarScrolled ? 'text-gray-800' : 'text-white'} hover:text-teal-500 transition duration-300`}>
+              Add Recipe
+            </Link>
+          </li>
+        </ul>
       </div>
     </nav>
   );

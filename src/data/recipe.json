@@ -1,134 +1,43 @@
 {
-  "recipes": [
-    {
-      "id": 1,
-      "name": "Spaghetti Carbonara",
-      "prep_time": 30,
-      "ingredients": [
-        { "name": "Spaghetti", "quantity": "200g" },
-        { "name": "Eggs", "quantity": "4 large" },
-        { "name": "Pancetta", "quantity": "100g" }
-      ],
-      "instructions": "Boil spaghetti. Cook pancetta. Mix with eggs.",
-      "image": "image/Spaghetti Carbonara.jpeg",
-      "category": "Main Course"
-    },
-    {
-      "id": 2,
-      "name": "Pancakes",
-      "prep_time": 20,
-      "ingredients": [
-        { "name": "Flour", "quantity": "200g" },
-        { "name": "Milk", "quantity": "200ml" },
-        { "name": "Egg", "quantity": "1 large" }
-      ],
-      "instructions": "Mix ingredients. Cook on skillet.",
-      "image": "image/Pancake.jpeg",
-      "category": "Breakfast"
-    },
-    {
-      "id": 3,
-      "name": "Chicken Curry",
-      "prep_time": 45,
-      "ingredients": [
-        { "name": "Chicken", "quantity": "500g" },
-        { "name": "Curry Powder", "quantity": "2 tbsp" },
-        { "name": "Coconut Milk", "quantity": "400ml" }
-      ],
-      "instructions": "Cook chicken. Add curry powder and coconut milk. Simmer until done.",
-      "image": "image/Chicken Curry.jpeg",
-      "category": "Main Course"
-    },
-    {
-      "id": 4,
-      "name": "Caesar Salad",
-      "prep_time": 15,
-      "ingredients": [
-        { "name": "Romaine Lettuce", "quantity": "1 head" },
-        { "name": "Croutons", "quantity": "100g" },
-        { "name": "Parmesan Cheese", "quantity": "50g" }
-      ],
-      "instructions": "Chop lettuce. Add croutons and cheese. Drizzle with Caesar dressing.",
-      "image": "image/caesar_salad.jpeg",
-      "category": "Salad"
-    },
-    {
-      "id": 5,
-      "name": "Margherita Pizza",
-      "prep_time": 60,
-      "ingredients": [
-        { "name": "Pizza Dough", "quantity": "1 ball" },
-        { "name": "Tomato Sauce", "quantity": "100ml" },
-        { "name": "Mozzarella Cheese", "quantity": "150g" }
-      ],
-      "instructions": "Spread sauce on dough. Add cheese. Bake until golden.",
-      "image": "image/Margherita Pizza.webp",
-      "category": "Main Course"
-    },
-    {
-      "id": 6,
-      "name": "Beef Tacos",
-      "prep_time": 25,
-      "ingredients": [
-        { "name": "Ground Beef", "quantity": "300g" },
-        { "name": "Taco Shells", "quantity": "8 shells" },
-        { "name": "Lettuce", "quantity": "1 cup" }
-      ],
-      "instructions": "Cook beef with spices. Assemble tacos with beef, lettuce, and toppings.",
-      "image": "image/Beef Tacos.jpeg",
-      "category": "Main Course"
-    },
-    {
-      "id": 7,
-      "name": "Vegetable Stir Fry",
-      "prep_time": 20,
-      "ingredients": [
-        { "name": "Mixed Vegetables", "quantity": "400g" },
-        { "name": "Soy Sauce", "quantity": "3 tbsp" },
-        { "name": "Garlic", "quantity": "2 cloves" }
-      ],
-      "instructions": "Stir-fry vegetables with garlic and soy sauce.",
-      "image": "image/Vegetable Stir Fry.jpeg",
-      "category": "Main Course"
-    },
-    {
-      "id": 8,
-      "name": "French Toast",
-      "prep_time": 15,
-      "ingredients": [
-        { "name": "Bread", "quantity": "4 slices" },
-        { "name": "Eggs", "quantity": "2 large" },
-        { "name": "Milk", "quantity": "100ml" }
-      ],
-      "instructions": "Dip bread in egg mixture. Cook on skillet until golden brown.",
-      "image": "image/French Toast.jpeg",
-      "category": "Breakfast"
-    },
-    {
-      "id": 9,
-      "name": "Grilled Salmon",
-      "prep_time": 25,
-      "ingredients": [
-        { "name": "Salmon Fillet", "quantity": "2 pieces" },
-        { "name": "Lemon", "quantity": "1 slice" },
-        { "name": "Olive Oil", "quantity": "2 tbsp" }
-      ],
-      "instructions": "Brush salmon with oil. Grill and serve with lemon slices.",
-      "image": "image/Grilled Salmon.jpeg",
-      "category": "Main Course"
-    },
-    {
-      "id": 10,
-      "name": "Chocolate Brownies",
-      "prep_time": 35,
-      "ingredients": [
-        { "name": "Chocolate", "quantity": "200g" },
-        { "name": "Butter", "quantity": "100g" },
-        { "name": "Sugar", "quantity": "150g" }
-      ],
-      "instructions": "Melt chocolate and butter. Mix in sugar and flour. Bake until set.",
-      "image": "image/Chocolate Brownies.jpeg",
-      "category": "Dessert"
-    }
-  ]
-}
+    "recipes": [
+      {
+        "id": 1,
+        "name": "Spaghetti Carbonara",
+        "prep_time": 30,
+        "category": "Pasta",
+        "image": "public/image/carbonara-horizontal-square640-v2.jpg",
+        "ingredients": [
+          { "name": "Spaghetti", "quantity": "200g" },
+          { "name": "Eggs", "quantity": "4 large" },
+          { "name": "Pancetta", "quantity": "100g" }
+        ],
+        "instructions": "Boil spaghetti. Cook pancetta. Mix with eggs."
+      },
+      {
+        "id": 2,
+        "name": "Pancakes",
+        "prep_time": 20,
+        "category": "Breakfast",
+        "image": "/images/pancakes.jpg",
+        "ingredients": [
+          { "name": "Flour", "quantity": "200g" },
+          { "name": "Milk", "quantity": "200ml" },
+          { "name": "Egg", "quantity": "1 large" }
+        ],
+        "instructions": "Mix ingredients. Cook on skillet."
+      },
+      {
+        "id": 3,
+        "name": "Chicken Curry",
+        "prep_time": 40,
+        "category": "Main Course",
+        "image": "/images/chicken-curry.jpg",
+        "ingredients": [
+          { "name": "Chicken", "quantity": "500g" },
+          { "name": "Coconut Milk", "quantity": "200ml" },
+          { "name": "Curry Powder", "quantity": "2 tbsp" }
+        ],
+        "instructions": "Cook chicken. Add curry powder. Pour in coconut milk and simmer."
+      }
+    ]
+  }

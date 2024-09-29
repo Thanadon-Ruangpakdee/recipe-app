@@ -1,151 +1,95 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from "react";
+import { Container, Row, Col, Card, Button, ButtonGroup, Form, InputGroup } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const RecipeListPage = ({ recipes }) => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [highlightedRecipes, setHighlightedRecipes] = useState(() => {
-    const savedHighlightedRecipes = localStorage.getItem('highlightedRecipes');
-    return savedHighlightedRecipes ? JSON.parse(savedHighlightedRecipes) : [];
-  });
+  const [filteredRecipes, setFilteredRecipes] = useState(recipes);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const categories = ['All', 'Dessert', 'Main Course', 'Appetizer', 'Breakfast'];
+  // Function to filter recipes by category and search
+  const filterRecipes = useMemo(() => {
+    return recipes.filter((recipe) => {
+      const matchesCategory = selectedCategory === "All" || recipe.category === selectedCategory;
+      const matchesSearch = recipe.name.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [recipes, selectedCategory, searchQuery]);
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
+  useEffect(() => {
+    setFilteredRecipes(filterRecipes);
+  }, [filterRecipes]);
+
+  const handleSearch = () => {
+    setSearchQuery(searchQuery.trim());
   };
 
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-  };
+  const categories = useMemo(() => {
+    return ["All", ...new Set(recipes.map((recipe) => recipe.category))];
+  }, [recipes]);
 
-  const handleHighlight = (recipe) => {
-    if (!highlightedRecipes.some((r) => r.id === recipe.id)) {
-      const updatedHighlightedRecipes = [...highlightedRecipes, recipe];
-      setHighlightedRecipes(updatedHighlightedRecipes);
-      localStorage.setItem('highlightedRecipes', JSON.stringify(updatedHighlightedRecipes));
-    }
-  };
-
-  const handleUnhighlight = (recipe) => {
-    const updatedHighlightedRecipes = highlightedRecipes.filter((r) => r.id !== recipe.id);
-    setHighlightedRecipes(updatedHighlightedRecipes);
-    localStorage.setItem('highlightedRecipes', JSON.stringify(updatedHighlightedRecipes));
-  };
-
-  const filteredRecipes = recipes.filter((recipe) => {
-    const matchesSearch = recipe.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'All' || recipe.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+  if (recipes.length === 0) {
+    return (
+      <Container className="mt-4">
+        <h1>No Recipes Found</h1>
+        <p>It looks like there are no recipes available. Try adding some!</p>
+      </Container>
+    );
+  }
 
   return (
-    <div className="container mt-5">
-      <h1 className="text-dark display-4 mb-4 text-center">All Recipes</h1>
+    <Container className="mt-4">
+      <h1 className="text-black text-4xl font-bold mb-6">All Recipes</h1>
 
-      {/* Search bar */}
-      <div className="input-group mb-4">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Search recipes..."
-          aria-label="Search recipes"
-          aria-describedby="button-search"
-          value={searchTerm}
-          onChange={handleSearch}
-        />
-        <button className="btn btn-outline-secondary" type="button" id="button-search">
-          Search
-        </button>
-      </div>
+      {/* Search Input */}
+      <Row className="mb-4">
+        <Col xs={12} md={8} className="d-flex justify-content-center justify-content-md-end">
+          <InputGroup>
+            <Form.Control
+              type="text"
+              placeholder="Search recipes..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <Button variant="dark" onClick={handleSearch}>Search</Button>
+          </InputGroup>
+        </Col>
+      </Row>
 
-      {/* Category Filter */}
-      <div className="d-flex justify-content-center mb-4">
+      {/* Category Filter Buttons */}
+      <ButtonGroup className="mb-4">
         {categories.map((category) => (
-          <button
+          <Button
             key={category}
-            className={`btn btn-outline-primary mx-2 ${selectedCategory === category ? 'active' : ''}`}
-            onClick={() => handleCategoryClick(category)}
+            variant={selectedCategory === category ? "dark" : "outline-secondary"}
+            onClick={() => setSelectedCategory(category)}
           >
             {category}
-          </button>
+          </Button>
         ))}
-      </div>
+      </ButtonGroup>
 
-      {/* Recipe Grid */}
-      <div className="row">
-        {filteredRecipes.length === 0 ? (
-          <div className="col-12">
-            <h3 className="text-center">No recipes match your search</h3>
-          </div>
-        ) : (
-          filteredRecipes.map((recipe) => (
-            <div key={recipe.id} className="col-12 col-sm-6 col-lg-3 d-flex align-items-stretch mb-4">
-              <div className={`card shadow-lg w-100 ${highlightedRecipes.some((r) => r.id === recipe.id) ? 'highlighted' : ''}`} style={{ height: '100%', transition: 'transform 0.5s, box-shadow 0.5s' }}>
-                <img
-                  src={recipe.image}
-                  alt={recipe.name}
-                  className="card-img-top img-fluid"
-                  style={{ height: '250px', objectFit: 'cover' }}
-                />
-                <div className="card-body d-flex flex-column">
-                  <h4 className="card-title font-weight-bold">{recipe.name}</h4>
-                  <p className="card-text">
-                    <strong>Prep Time:</strong> {recipe.prep_time} mins
-                  </p>
-                  <p className="card-text">
-                    <strong>Ingredients:</strong> {recipe.ingredients.length} items
-                  </p>
-                  <div className="flex-grow-1"></div>
-                  <div className="d-flex justify-content-between">
-                    <Link to={`/recipes/${recipe.id}`} className="btn btn-success mt-auto">
-                      View Details
-                    </Link>
-                    {highlightedRecipes.some((r) => r.id === recipe.id) ? (
-                      <button
-                        className="btn btn-danger mt-auto"
-                        onClick={() => handleUnhighlight(recipe)}
-                      >
-                        Unhighlight
-                      </button>
-                    ) : (
-                      <button
-                        className="btn btn-warning mt-auto"
-                        onClick={() => handleHighlight(recipe)}
-                      >
-                        Highlight
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))
-        )}
-      </div>
-
-      <style>{`
-        .card.highlighted {
-          animation: highlight-animation 0.5s ease forwards;
-        }
-
-        @keyframes highlight-animation {
-          0% {
-            box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
-            transform: scale(1);
-          }
-          50% {
-            box-shadow: 0 0 15px rgba(255, 215, 0, 1);
-            transform: scale(1.05);
-          }
-          100% {
-            box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
-            transform: scale(1);
-          }
-        }
-      `}</style>
-    </div>
+      {/* Recipe Cards */}
+      <Row>
+        {filteredRecipes.map((recipe) => (
+          <Col xs={12} sm={6} md={4} lg={3} key={recipe.id} className="mb-4">
+            <Card className="shadow-lg h-100">
+              <Card.Img
+                variant="top"
+                src={recipe.image}
+                alt={recipe.name}
+                style={{ height: "200px", objectFit: "cover" }}
+              />
+              <Card.Body>
+                <Card.Title>{recipe.name}</Card.Title>
+                <Card.Text>{recipe.instructions}</Card.Text>
+                <Link to={`/recipes/${recipe.id}`} className="btn btn-primary">View Details</Link>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </Container>
   );
 };
 

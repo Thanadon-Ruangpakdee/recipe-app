@@ -1,50 +1,67 @@
 import { useState, useEffect } from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom'; // ใช้ HashRouter ที่นี่
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import WelcomePage from './pages/WelcomePage';
 import RecipeListPage from './pages/RecipeListPage';
 import RecipeDetailPage from './pages/RecipeDetailPage';
 import AddRecipePage from './pages/AddRecipePage';
-import HighlightPage from './pages/HighlightPage'; // Import the HighlightPage
 import NotFoundPage from './pages/NotFoundPage';
 import Navbar from './components/Navbar';
-import recipeData from './data/recipe.json'; // Import data from recipe.json
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './index.css';
+import recipeData from './data/recipe.json'; // นำเข้าข้อมูลจาก recipe.json
 
 function App() {
-  const [localRecipes, setLocalRecipes] = useState(() => {
+  // ดึงข้อมูลจาก localStorage เมื่อแอปเริ่มต้นใช้งาน
+  const [recipes, setRecipes] = useState(() => {
     const savedRecipes = localStorage.getItem('recipes');
     return savedRecipes ? JSON.parse(savedRecipes) : [];
   });
 
+  // อัปเดต localStorage เมื่อมีการเปลี่ยนแปลงใน recipes
   useEffect(() => {
-    localStorage.setItem('recipes', JSON.stringify(localRecipes));
-  }, [localRecipes]);
+    if (recipes) {
+      localStorage.setItem('recipes', JSON.stringify(recipes));
+    }
+  }, [recipes]);
 
+  // ฟังก์ชันเพิ่มสูตรอาหารใหม่
   const addRecipe = (recipe) => {
-    const newRecipe = { id: Date.now(), ...recipe }; 
-    setLocalRecipes([...localRecipes, newRecipe]);
+    setRecipes([...recipes, { id: Date.now(), ...recipe }]); // ใช้ Date.now() เพื่อให้ id ไม่ซ้ำ
   };
 
+  // ฟังก์ชันลบสูตรอาหาร
   const deleteRecipe = (id) => {
+    // ตรวจสอบว่าสูตรอาหารมาจาก recipeData หรือไม่
+    const isDefaultRecipe = recipeData.recipes.some((recipe) => recipe.id === id);
+    if (isDefaultRecipe) {
+      alert('This recipe cannot be deleted.'); // แจ้งเตือนว่าลบไม่ได้
+      return;
+    }
+
     const confirmed = window.confirm('Are you sure you want to delete this recipe?');
     if (confirmed) {
-      const updatedRecipes = localRecipes.filter(recipe => recipe.id !== id);
-      setLocalRecipes(updatedRecipes);
+      const updatedRecipes = recipes.filter((recipe) => recipe.id !== id);
+      setRecipes(updatedRecipes);
     }
   };
 
-  const combinedRecipes = [...recipeData.recipes, ...localRecipes];
-
   return (
-    <Router> {/* ใช้ HashRouter ในที่นี้ */}
+    <Router>
       <Navbar />
       <Routes>
         <Route path="/" element={<WelcomePage />} />
-        <Route path="/recipes" element={<RecipeListPage recipes={combinedRecipes} />} />
-        <Route path="/recipes/:id" element={<RecipeDetailPage recipes={combinedRecipes} deleteRecipe={deleteRecipe} localRecipes={localRecipes} />} />
+        <Route 
+          path="/recipes" 
+          element={<RecipeListPage 
+                      recipes={[...recipeData.recipes, ...recipes]} // รวมข้อมูลจาก recipe.json และ recipes ใน localStorage
+                    />} 
+        />
+        <Route 
+          path="/recipes/:id" 
+          element={<RecipeDetailPage 
+                      recipes={[...recipeData.recipes, ...recipes]} 
+                      deleteRecipe={deleteRecipe} 
+                    />} 
+        />
         <Route path="/add-recipe" element={<AddRecipePage addRecipe={addRecipe} />} />
-        <Route path="/highlighted-recipes" element={<HighlightPage />} /> {/* Add HighlightPage route */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
