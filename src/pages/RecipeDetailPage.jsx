@@ -1,65 +1,75 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-function RecipeDetailPage({ recipes, deleteRecipe }) {
-  const { id } = useParams(); // ดึง id จาก URL
+function RecipeDetailPage({ recipes, deleteRecipe, localRecipes }) {
+  const { id } = useParams();
   const navigate = useNavigate();
   const [recipe, setRecipe] = useState(null);
 
   useEffect(() => {
     const foundRecipe = recipes.find((r) => r.id === parseInt(id));
-    setRecipe(foundRecipe); // ตั้งค่า recipe ตามที่ค้นพบ
+    setRecipe(foundRecipe);
   }, [id, recipes]);
 
   if (!recipe) {
     return (
-      <div className="container mx-auto mt-16 p-4">
-        <h1 className="text-black text-4xl font-bold mb-6">Recipe Not Found</h1>
-        <p className="text-black text-lg">
-          It looks like this recipe does not exist. Please go back to the recipes list.
-        </p>
-        <button
-          onClick={() => navigate('/recipes')}
-          className="mt-4 px-4 py-2 bg-gray-500 text-white font-semibold rounded-lg hover:bg-gray-600 transition duration-300"
-        >
-          Back to Recipes
-        </button>
+      <div className="container d-flex align-items-center justify-content-center min-vh-100">
+        <div className="text-center">
+          <h1 className="display-4 mb-3">Recipe Not Found</h1>
+          <p className="lead mb-4">It looks like this recipe does not exist. Please go back to the recipes list.</p>
+          <button
+            onClick={() => navigate('/recipes')}
+            className="btn btn-secondary"
+          >
+            Back to Recipes
+          </button>
+        </div>
       </div>
     );
   }
 
+  const isLocalRecipe = localRecipes.some((r) => r.id === recipe.id);
+
   const handleDelete = () => {
-    deleteRecipe(recipe.id); // เรียกฟังก์ชันลบสูตรอาหาร
-    navigate('/recipes'); // กลับไปที่หน้ารายการ
+    if (isLocalRecipe) {
+      deleteRecipe(recipe.id);
+      navigate('/recipes');
+    } else {
+      alert('This recipe cannot be deleted.');
+    }
   };
 
   return (
-    <div className="container mx-auto mt-16 p-4">
-      <h1 className="text-5xl font-bold text-black mb-4">{recipe.name}</h1>
-      <div className="bg-white p-6 rounded-lg shadow-lg">
-        <h2 className="text-3xl font-semibold text-black mb-2">Ingredients:</h2>
-        <ul className="list-disc pl-5 text-lg text-gray-700">
-          {recipe.ingredients.map((ingredient, index) => (
-            <li key={index}>
-              {ingredient.name} - {ingredient.quantity}
-            </li>
-          ))}
-        </ul>
-        <h3 className="text-2xl font-semibold text-black mt-4">Instructions:</h3>
-        <p className="text-lg text-gray-700">{recipe.instructions}</p>
-        <div className="mt-8 flex space-x-4">
-          <button
-            onClick={handleDelete}
-            className="px-4 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition duration-300"
-          >
-            Delete Recipe
-          </button>
-          <button
-            onClick={() => navigate('/recipes')}
-            className="px-4 py-2 bg-gray-500 text-white font-semibold rounded-lg hover:bg-gray-600 transition duration-300"
-          >
-            Back to Recipes
-          </button>
+    <div className="container py-5">
+      <h1 className="display-4 mb-4">{recipe.name}</h1>
+      <div className="card shadow-lg">
+        <div className="card-body">
+          <h2 className="card-title h3">Ingredients</h2>
+          <ul className="list-group list-group-flush mb-3">
+            {recipe.ingredients.map((ingredient, index) => (
+              <li key={index} className="list-group-item">
+                {ingredient.name} - {ingredient.quantity}
+              </li>
+            ))}
+          </ul>
+          <h3 className="card-subtitle h4 mb-3">Instructions</h3>
+          <p className="card-text">{recipe.instructions}</p>
+          <div className="d-flex justify-content-between mt-4">
+            {isLocalRecipe && (
+              <button
+                onClick={handleDelete}
+                className="btn btn-danger"
+              >
+                Delete Recipe
+              </button>
+            )}
+            <button
+              onClick={() => navigate('/recipes')}
+              className="btn btn-secondary"
+            >
+              Back to Recipes
+            </button>
+          </div>
         </div>
       </div>
     </div>
