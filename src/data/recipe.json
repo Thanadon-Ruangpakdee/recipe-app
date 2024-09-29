@@ -10,7 +10,7 @@
         { "name": "Pancetta", "quantity": "100g" }
       ],
       "instructions": "Boil spaghetti. Cook pancetta. Mix with eggs.",
-      "image": "public/image/carbonara.jpg",
+      "image": "public/image/Spaghetti Carbonara.jpeg",
       "category": "Main Course"
     },
     {
@@ -23,7 +23,7 @@
         { "name": "Egg", "quantity": "1 large" }
       ],
       "instructions": "Mix ingredients. Cook on skillet.",
-      "image": "public/image/pancakes.jpg",
+      "image": "public/image/Pancake.jpeg",
       "category": "Breakfast"
     },
     {
